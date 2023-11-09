@@ -37,7 +37,11 @@ const addToPlaylist = (movie) => {
     }
     setPlaylist(newToPlay);
   };
-
+  const removeFromPlaylist = (movie) => {
+    setPlaylist( playlist.filter(
+      (mId) => mId !== movie.id
+    ) )
+  };
   console.log(playlist);
 
   return (
@@ -48,7 +52,8 @@ const addToPlaylist = (movie) => {
         removeFromFavorites,
         addReview,
         playlist,
-        addToPlaylist
+        addToPlaylist,
+        removeFromPlaylist
       }}
     >
       {props.children}

@@ -1,13 +1,14 @@
 import React from "react";
 import PageTemplate from '../components/templateMovieListPage'
-import { getUpcoming } from "../api/tmdb-api";
+import { getTopRated } from "../api/tmdb-api";
 import Spinner from '../components/spinner';
 import { useQuery } from 'react-query';
 import AddToPlaylistIcon from '../components/cardIcons/playlistAdd'
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 
-const UpcomingMoviesPage = (props) => {
+const TopRatedMoviesPage = (props) => {
   // const [movies, setMovies] = useState([]);
-  const {  data, error, isLoading, isError }  = useQuery('discoverUpcoming', getUpcoming)
+  const {  data, error, isLoading, isError }  = useQuery('discoverTopRated', getTopRated)
 
   if (isLoading) {
     return <Spinner />
@@ -18,18 +19,18 @@ const UpcomingMoviesPage = (props) => {
   }  
   const movies = data.results;
 
-  const playlist = movies.filter(m => m.necessarywatch)
-  localStorage.setItem('playlist', JSON.stringify(playlist))
+  const favorites = movies.filter(m => m.favorite)
+  localStorage.setItem('favorites', JSON.stringify(favorites))
 
   return (
     <PageTemplate
-      title='Upcoming Movies'
+      title='Top Rated Movies'
       movies={movies}
       action={(movie) => {
-        return <AddToPlaylistIcon movie={movie} />
+        return <AddToFavoritesIcon movie={movie} />
       }}    
     />
     
   );
 };
-export default UpcomingMoviesPage;
+export default TopRatedMoviesPage;

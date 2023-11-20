@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import React, {useState} from "react";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
-import {useNavigate, useNavigation} from "react-router-dom";
 import { Link } from "react-router-dom";
 const root = {
     display: "flex",
@@ -100,6 +99,20 @@ const MovieDetails = ({movie}) => {  // Don't miss this!
             >
                <NavigationIcon/>
                 Recommendations
+            </Fab>
+                </Link>
+                <Link to={`/similar/${movie.id}`}>
+            <Fab
+                color="secondary"
+                variant="extended"
+                sx={{
+                    position: 'fixed',
+                    bottom: '1em',
+                    right: '10em'
+                }}
+            >
+               <NavigationIcon/>
+                Similar
             </Fab>
                 </Link>
         </>

@@ -55,7 +55,8 @@ const App = () => {
           <Route path="/movieCredits/:id" element={<MovieCreditsPage/>} />
           <Route path="/credits/:id" element={<CreditsPage/>} />
           <Route path="*" element={ <Navigate to="/" /> } />
-          </Routes>
+          <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+        </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

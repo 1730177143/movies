@@ -2,6 +2,8 @@ import React, {useContext} from 'react';
 import {Button, TextField, Grid, Paper, Typography} from '@mui/material';
 import {useNavigate} from "react-router-dom";
 import {MoviesContext} from "../../contexts/moviesContext";
+import GoogleIcon from '@mui/icons-material/Google';
+import Alert from "@mui/material/Alert";
 
 function Login() {
     const context = useContext(MoviesContext);
@@ -38,6 +40,9 @@ function Login() {
                             value={password}
                             onChange={(e) => context.getPassword(e.target.value)}
                         />
+                        {<Typography color="error">
+                            {error === '' ? null : <Alert severity="error">{error}</Alert>}
+                        </Typography>}
                         <Button
                             type="submit"
                             color="primary"
@@ -49,7 +54,10 @@ function Login() {
                         </Button>
                     </form>
                     <Typography align="center">
-                        No account <Button type="register"
+                        <Button>< GoogleIcon
+                            onClick={(e) => context.googleLogin()}
+                        /></Button>
+                        No account ? <Button type="register"
                                            color="primary"
                                            variant="contained"
 

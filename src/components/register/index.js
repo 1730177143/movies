@@ -2,10 +2,11 @@ import React, {useContext} from 'react';
 import {Button, TextField, Grid, Paper, Typography} from '@mui/material';
 
 import {MoviesContext} from "../../contexts/moviesContext";
+import Alert from '@mui/material/Alert';
 
 function Register() {
     const context = useContext(MoviesContext);
-    const {email,password,error} = useContext(MoviesContext);
+    const {email, password, error} = useContext(MoviesContext);
 
 
     return (
@@ -35,7 +36,9 @@ function Register() {
                             value={password}
                             onChange={(e) => context.getPassword(e.target.value)}
                         />
-                        {error && <Typography color="error">{error}</Typography>}
+                        {<Typography color="error">
+                            {error === '' ? null : <Alert severity="error">{error}</Alert>}
+                        </Typography>}
                         <Button
                             type="submit"
                             color="primary"

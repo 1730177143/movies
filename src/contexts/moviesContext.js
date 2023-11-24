@@ -1,4 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {auth} from "../firebase/firebase-config";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import {useNavigate} from "react-router-dom";
 
 export const MoviesContext = React.createContext(null);
 
@@ -7,6 +10,46 @@ const MoviesContextProvider = (props) => {
     const [myReviews, setMyReviews] = useState({})
     const [playlist, setPlaylist] = useState([]);
     const [follows, setFollows] = useState([])
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const [isLogin, setIsLogin] = useState(false);
+    const getEmail = (email) => {
+        setEmail(email);
+
+    };
+    const getPassword = (password) => {
+        setPassword(password);
+    }
+    const handleRegister = async () => {
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+
+            navigate("/login", {replace: true});
+        } catch (error) {
+            console.error("Authentication failed:", error);
+        }
+    };
+    const handleLogin = async () => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            setIsLogin(true);
+            navigate("/", {replace: true});
+
+        } catch (error) {
+            console.error("Authentication failed:", error);
+        }
+    };
+    const logout = async () => {
+        try {
+            await auth.signOut();
+            setIsLogin(false);
+
+        } catch (error) {
+            console.error("Authentication failed:", error);
+        }
+    }
     const addToFavorites = (movie) => {
         let newFavorites = [];
         if (!favorites.includes(movie.id)) {
@@ -53,7 +96,6 @@ const MoviesContextProvider = (props) => {
             (mId) => mId !== movie.id
         ))
     };
-    console.log(follows);
 
     return (
         <MoviesContext.Provider
@@ -68,6 +110,13 @@ const MoviesContextProvider = (props) => {
                 follows,
                 addToFollows,
                 removeFromFollows,
+                handleLogin,
+                handleRegister,
+                getPassword,
+                getEmail,
+                isLogin,
+                email,
+                logout,
             }}
         >
             {props.children}

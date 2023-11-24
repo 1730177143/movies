@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,8 @@ import {useNavigate} from "react-router-dom";
 import {styled} from '@mui/material/styles';
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import {MoviesContext} from "../../contexts/moviesContext";
+import Avatar from '@mui/material/Avatar';
 
 const Offset = styled('div')(({theme}) => theme.mixins.toolbar);
 
@@ -18,12 +20,14 @@ const SiteHeader = ({history}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [movieListAnchorEl, setMovieListAnchorEl] = useState(null);
     const [personalMenuAnchorEl, setPersonalMenuAnchorEl] = useState(null);
+    const [userMenuAnchorEl, setUserMenuAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     const navigate = useNavigate();
+    const {isLogin, email, logout} = useContext(MoviesContext);
 
     const menuOptions = [
         {label: "Home", path: "/"},
@@ -44,14 +48,13 @@ const SiteHeader = ({history}) => {
     const handleMenuSelect = (pageURL) => {
         navigate(pageURL, {replace: true});
     };
-
+    const login = () => {
+        navigate("/login", {replace: true});
+    }
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
     const handleMovieListClick = (event) => {
         setMovieListAnchorEl(event.currentTarget);
     };
@@ -59,11 +62,14 @@ const SiteHeader = ({history}) => {
     const handlePersonalMenuClick = (event) => {
         setPersonalMenuAnchorEl(event.currentTarget);
     };
-
+    const handleUserMenuClick = (event) => {
+        setUserMenuAnchorEl(event.currentTarget);
+    };
     const handleClose = () => {
         setAnchorEl(null);
         setMovieListAnchorEl(null);
         setPersonalMenuAnchorEl(null);
+        setUserMenuAnchorEl(null);
     };
     return (
         <>
@@ -86,6 +92,22 @@ const SiteHeader = ({history}) => {
                             >
                                 <MenuIcon/>
                             </IconButton>
+                            {isLogin ?
+                                <IconButton>
+                                    <Avatar onClick={() => {
+                                        logout()
+                                    }}>  {email[0].toUpperCase()}</Avatar>
+                                </IconButton>
+                                :
+                                <Button
+                                    id="loginButton"
+                                    onClick={() => login()}
+                                    color="inherit">
+                                    Login
+                                </Button>
+                            }
+
+
                             <Menu
                                 id="menu-appbar"
                                 anchorEl={anchorEl}
@@ -186,13 +208,32 @@ const SiteHeader = ({history}) => {
                                     </MenuItem>
                                 ))}
                             </Menu>
+                            {isLogin ? <><IconButton onClick={handleUserMenuClick}>
+                                    <Avatar>
+                                        {email[0].toUpperCase()}
+                                    </Avatar></IconButton>
+                                    <Menu id="UserMenu"
+                                          anchorEl={userMenuAnchorEl}
+                                          open={Boolean(userMenuAnchorEl)}
+                                          onClose={handleClose}>
+                                        <MenuItem onClick={() => logout()}>
+                                            Log out
+                                        </MenuItem>
+                                    </Menu></>
+                                : <><Button
+                                    id="loginButton"
+                                    onClick={() => login()}
+                                    color="inherit">
+                                    Login
+                                </Button></>}
                         </>
                     )}
                 </Toolbar>
             </AppBar>
             <Offset/>
         </>
-    );
+    )
+        ;
 };
 
 export default SiteHeader;

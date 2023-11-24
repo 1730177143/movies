@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import PageTemplate from '../components/templateMovieListPage'
 import { getPopular } from "../api/tmdb-api";
 import Spinner from '../components/spinner';
 import { useQuery } from 'react-query';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import {MoviesContext} from "../contexts/moviesContext";
 
 const PopularMoviesPage = (props) => {
-  // const [movies, setMovies] = useState([]);
-  const {  data, error, isLoading, isError }  = useQuery('discoverPopular', getPopular)
+  const {page} = useContext(MoviesContext);
+  const {  data, error, isLoading, isError }  = useQuery(['discoverPopular',page], getPopular)
 
   if (isLoading) {
     return <Spinner />

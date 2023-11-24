@@ -1,14 +1,16 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {getMovies} from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import {useQuery} from 'react-query';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import {MoviesContext} from "../contexts/moviesContext";
+
 
 const HomePage = (props) => {
-
+    const {page} = useContext(MoviesContext);
     const {data, refetch, error, isLoading, isError} = useQuery(
-        'discover', getMovies);
+        ['discover', page], getMovies);
 
 
     useEffect(() => {

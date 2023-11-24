@@ -20,6 +20,10 @@ const MoviesContextProvider = (props) => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(false);
+    const [page, setPage] = React.useState(1);
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
     const getEmail = (email) => {
         setEmail(email);
 
@@ -67,10 +71,10 @@ const MoviesContextProvider = (props) => {
             navigate("/", {replace: true});
 
         } catch (error) {
-            if (error.code==="auth/invalid-login-credentials"){
+            if (error.code === "auth/invalid-login-credentials") {
                 setError("This email has already been registered by Google.");
                 console.error("This email has already been registered by Google.");
-            }else {
+            } else {
                 console.error("Authentication failed:", error);
             }
         }
@@ -153,6 +157,8 @@ const MoviesContextProvider = (props) => {
                 logout,
                 googleLogin,
                 error,
+                handlePageChange,
+                page,
             }}
         >
             {props.children}

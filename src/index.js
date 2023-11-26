@@ -1,29 +1,29 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import {createRoot} from "react-dom/client";
 import {BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
 import HomePage from "./pages/homePage";
-import MoviePage from "./pages/movieDetailsPage";
-import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
-import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from './components/siteHeader'
-import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import {QueryClientProvider, QueryClient} from "react-query";
 import {ReactQueryDevtools} from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage'
-import PlaylistPage from "./pages/playlistPage";
-import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
-import TrendingMoviesPage from "./pages/trendingMoviesPage";
-import RecommendationsPage from "./pages/recommendationsPage";
-import PopularMoviesPage from "./pages/popularPage";
-import SimilarPage from "./pages/similarMoviesPage";
-import ActorHomePage from "./pages/actorHomePage";
-import ActorPage from "./pages/actorDetailsPage";
-import MovieCreditsPage from "./pages/movieCreditsPage";
-import CreditsPage from "./pages/creditsPage";
-import FollowsPage from "./pages/followsPage";
-import LoginPage from "./pages/loginPage";
-import RegisterPage from "./pages/registerPage";
+const RegisterPage = lazy(() => import("./pages/registerPage"));
+const LoginPage = lazy(() => import("./pages/loginPage"));
+const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
+const FavoriteMoviesPage = lazy(() => import("./pages/favoriteMoviesPage"));
+const MovieReviewPage = lazy(() => import("./pages/movieReviewPage"));
+const UpcomingMoviesPage = lazy(() => import("./pages/upcomingMoviesPage"));
+const AddMovieReviewPage = lazy(() => import("./pages/addMovieReviewPage"));
+const PlaylistPage = lazy(() => import("./pages/playlistPage"));
+const TopRatedMoviesPage = lazy(() => import("./pages/topRatedMoviesPage"));
+const TrendingMoviesPage = lazy(() => import("./pages/trendingMoviesPage"));
+const RecommendationsPage = lazy(() => import("./pages/recommendationsPage"));
+const PopularMoviesPage = lazy(() => import("./pages/popularPage"));
+const SimilarPage = lazy(() => import("./pages/similarMoviesPage"));
+const ActorHomePage = lazy(() => import("./pages/actorHomePage"));
+const ActorPage = lazy(() => import("./pages/actorDetailsPage"));
+const MovieCreditsPage = lazy(() => import("./pages/movieCreditsPage"));
+const CreditsPage = lazy(() => import("./pages/creditsPage"));
+const FollowsPage = lazy(() => import("./pages/followsPage"));
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -40,6 +40,7 @@ const App = () => {
             <BrowserRouter>
                 <MoviesContextProvider>
                 <SiteHeader/>
+                    <Suspense fallback={<h1>Loading page</h1>}>
                     <Routes>
                         <Route path="/reviews/form" element={<AddMovieReviewPage/>}/>
                         <Route path="/movies/favorites" element={<FavoriteMoviesPage/>}/>
@@ -63,6 +64,7 @@ const App = () => {
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route path="/register" element={<RegisterPage/>}/>
                     </Routes>
+                    </Suspense>
                 </MoviesContextProvider>
             </BrowserRouter>
             <ReactQueryDevtools initialIsOpen={false}/>

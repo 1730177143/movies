@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/movies/static/js/main.d460a99c.js",
+    "static/media/pexels-dziana-hasanbekava-5480827.jpg": "/movies/static/media/pexels-dziana-hasanbekava-5480827.6123c500508cea5447e7.jpg",
+    "static/media/film-poster-placeholder.png": "/movies/static/media/film-poster-placeholder.9a8182eb4c8ae70fe602.png",
+    "index.html": "/movies/index.html",
+    "main.d460a99c.js.map": "/movies/static/js/main.d460a99c.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d460a99c.js"
+  ]
+}

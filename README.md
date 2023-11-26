@@ -1,71 +1,78 @@
-# Assignment 1 - ReactJS app.
+# Assignment 1 - ReactJS Movie App
 
 Name: Long Liu
 
-## Overview.
+## Overview
 
-[A brief statement on the content of this repository.]
+This repository contains a ReactJS-based web application designed to provide a comprehensive and interactive experience for movie enthusiasts. The app interfaces with various movie-related APIs to present a rich set of information including movie details, actor profiles, and various movie lists.
 
-### Features.
+## Features
 
-+ Playlist page
-+ Top-rated page
-+ expand site header
-+ trending page
-+ recommendations page
-+ popular movies page
-+ similar page
-+ actor home page
-+ actor details page
-+ movie credits page
-+ credits page
-+ actor filter function
-+ follow actor function
-+ pagination
-+ login in by email and password
-+ login in by Google
-+ register 
++ **Playlist Page**: Users can create and manage a personalized movie playlist.
++ **Top-rated Page**: Displays a list of top-rated movies based on user ratings.
++ **Expanded Site Header**: Enhanced navigation options for improved user experience.
++ **Trending Page**: Showcases movies that are currently trending.
++ **Recommendations Page**: Suggests movies based on user preferences or movie history.
++ **Popular Movies Page**: Lists movies that are popular among users.
++ **Similar Movies Page**: Displays movies similar to a selected one.
++ **Actor Home Page**: A dedicated page for browsing popular actors.
++ **Actor Details Page**: Provides detailed information about specific actors.
++ **Movie Credits Page**: Shows the credits for a particular movie.
++ **Credits Page**: Displays actors and their roles in a specific movie.
++ **Actor Filter Function**: Allows users to filter actors based on various criteria.
++ **Follow Actor Function**: Users can follow their favorite actors.
++ **Pagination**: Implements pagination for movie and actor lists.
++ **Login via Email and Password**: Standard authentication method.
++ **Login via Google**: OAuth-based Google login integration.
++ **Register**: New users can register an account.
++ **Code Splitting**: Improves page load efficiency by splitting code into chunks.
++ **Auto-deployment**: Automated deployment process for efficient application updates.
 
-## Setup requirements.
+## Setup Requirements
 
-`npm install`
+To set up the project locally, run the following command:
 
-## API endpoints.
+```
+npm install
+```
 
+This will install all the necessary dependencies for the project.
 
-+ Discover list of movies - discover/movie
-+ Movie details - movie/:id
-+ Movie genres - /genre/movie/list
-+ Top-rated movies- movie/top_rated
-+ Trending movies - trending/movie/day
-+ recommendations movies - movie/:id/recommendations
-+ similar movies - movie/:id/similar
-+ popular actors - person/popular
-+ actor details - person/:id
-+ actor images - person/:id/images
-+ movie credits - person/:id/movie_credits
-+ credits - movie/:id/credits
+## API Endpoints
 
-## Routing.
+The application uses several API endpoints for fetching movie and actor data:
 
-[ List the __new routes__ supported by your app and state the associated page.]
++ **Discover List of Movies**: `discover/movie`
++ **Movie Details**: `movie/:id`
++ **Movie Genres**: `/genre/movie/list`
++ **Top-rated Movies**: `movie/top_rated`
++ **Trending Movies**: `trending/movie/day`
++ **Recommendations Movies**: `movie/:id/recommendations`
++ **Similar Movies**: `movie/:id/similar`
++ **Popular Actors**: `person/popular`
++ **Actor Details**: `person/:id`
++ **Actor Images**: `person/:id/images`
++ **Movie Credits**: `person/:id/movie_credits`
++ **Credits**: `movie/:id/credits`
 
-+ /actors/follows - display following actors
-+ /movies/upcoming - display upcoming movies
-+ /movies/playlist -  display movies in playlist
-+ /movies/topRated - display top-rated movies
-+ /movies/popular - display popular movies
-+ /movies/trending - display daily trending movies
-+ /recommendations/:id - display recommendations movies about the movie
-+ /similar/:id - display similar movies about the movie
-+ /actors - display popular actors
-+ /actors/:id  - display the  actor details
-+ /movieCredits/:id - display movies about the actor
-+ /credits/:id - display actors about the movies
-+ /login
-+ /register
+## Routing
 
+The app includes various routes for different pages and functionalities:
 
-## Independent learning (If relevant).
++ `/actors/follows`: Displays actors followed by the user.
++ `/movies/upcoming`: Shows upcoming movie releases.
++ `/movies/playlist`: Displays user's movie playlist.
++ `/movies/topRated`: Lists top-rated movies.
++ `/movies/popular`: Shows popular movies.
++ `/movies/trending`: Displays currently trending movies.
++ `/recommendations/:id`: Shows movie recommendations.
++ `/similar/:id`: Lists movies similar to a particular one.
++ `/actors`: Shows popular actors.
++ `/actors/:id`: Displays detailed information about an actor.
++ `/movieCredits/:id`: Shows movies related to a specific actor.
++ `/credits/:id`: Displays movie credits.
 
-- firebase 
+## Independent Learning
+
++ **Code Splitting**: Implemented code splitting for enhanced webpage efficiency, referenced from [Create React App Documentation on Code Splitting](https://facebook.github.io/create-react-app/docs/code-splitting).
++ **Online Deployment**: Deployed the application on GitHub Pages, accessible at [Movies App](https://1730177143.github.io/movies). Referenced from [Create React App Documentation on Deployment](https://create-react-app.dev/docs/deployment/).
